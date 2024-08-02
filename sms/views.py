@@ -33,3 +33,19 @@ def send_sms(phone_number, message):
     )
 
     return response
+
+def send_ses(to_address, subject, body):
+    client = boto3.client('ses', region_name=AWS_REGION_NAME)
+    response = client.send_email(
+        Source= 'daviskareem92@gmail.com',
+        Destination={
+            'ToAddresses': [
+            'string',]},
+
+        Message = {
+            'Subject': {'Data': 'string'},
+            'Body': {'Text': {'Data': 'body'}},
+            }
+        )
+    
+    return response
