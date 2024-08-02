@@ -16,14 +16,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from messages.serializers import *
 from rest_framework.routers import DefaultRouter
-from rest_framework import views
-
+from sms import serializers
+from sms.views import *
 
 router = DefaultRouter()
-router.register(r'leads', views.LeadViewSet)
-router.register(r'messages', views.MessageViewSet)
+router.register(r'leads', LeadViewSet, basename='lead')
+router.register(r'messages', MessageViewSet, basename='message')
 
 
 urlpatterns = [
