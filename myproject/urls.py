@@ -16,13 +16,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from messages.views import *
+from messages.serializers import *
+from rest_framework.routers import DefaultRouter
+from rest_framework import views
 
 
+router = DefaultRouter()
+router.register(r'leads', views.LeadViewSet)
+router.register(r'messages', views.MessageViewSet)
 
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('api-auth/', include('rest_framework.urls'))
+    path('api-auth/', include('rest_framework.urls')),
+    path('', include(router.urls)),
+
 
 ]
