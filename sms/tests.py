@@ -37,7 +37,7 @@ class MessageAPITestCase(APITestCase):
 class NotificationTestCase(TestCase):
     @mock_sns
     def test_send_sms(self):
-        phone_number = '+1234567890'
+        phone_number = '+5615280755'
         message = 'Hello World'
         response = send_sms(phone_number, message)
         self.assertIsNotNone(response)
@@ -45,7 +45,7 @@ class NotificationTestCase(TestCase):
 
     @mock_ses
     def test_send_ses(self):
-        to_address = 'recipient@example.com'
+        to_address = 'daviskareem92@gmail.com'
         subject = 'Test Email'
         body = 'This is a test email.'
         response = send_ses(to_address, subject, body)
