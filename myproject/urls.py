@@ -30,6 +30,9 @@ urlpatterns = [
     path('api-auth/', include('rest_framework.urls')),
     path('', include(router.urls)),
     path('api/', include(router.urls)),
+    path('api/send_sms/', send_sms_view),
+    path('api/send_email/', send_email_view),
+
 
 
 ] 

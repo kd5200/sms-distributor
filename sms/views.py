@@ -6,6 +6,9 @@ import boto3
 import os
 from dotenv import load_dotenv
 from botocore.exceptions import BotoCoreError, ClientError
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+
 
 
 # Create your views here.
@@ -66,3 +69,19 @@ def send_ses(to_address, subject, body):
         response = None
 
     return response
+
+
+@api_view(['POST'])
+def send_sms_view(request):
+    phone_number = request.data.get('phone_number')
+    message = request.data.get('message')
+    response = send_sms(phone_number, message)
+    return Response(response)
+
+@api_view(['POST'])
+def send_email_view(request):
+    to_address = request.data.get('to_address')
+    subject = request.data.get('subject')
+    body = request.data.get('body')
+    response = send_ses(to_address, subject, body)
+    return Response(response)
