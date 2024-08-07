@@ -70,6 +70,8 @@ def send_ses(to_address, subject, body):
 
     return response
 
+# Keep in mind, when moving into production that we need to request to be removed from the sandbox environment within the AWS console for SES for daily limit increases and sending marketing messages to unverified recepients. 
+
 
 @api_view(['POST'])
 def send_sms_view(request):
