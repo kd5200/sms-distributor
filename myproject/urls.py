@@ -28,10 +28,10 @@ router.register(r'messages', MessageViewSet, basename='message')
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api-auth/', include('rest_framework.urls')),
-    path('', include(router.urls)),
+    # path('', include(router.urls)),
     path('api/', include(router.urls)),
     path('api/send_sms/', send_sms_view),
-    path('api/send-email/', send_email_view, name='send_email'),
+    path('api/send_email/', send_email_view, name='send_email'),
 
 
 

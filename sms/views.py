@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from .models import Lead, Message
 from .serializers import LeadSerializer, MessageSerializer
-from rest_framework import viewsets
+from rest_framework import viewsets, status
 import boto3
 import os
 from dotenv import load_dotenv
@@ -26,7 +26,7 @@ class LeadViewSet(viewsets.ModelViewSet):
     serializer_class = LeadSerializer
 
 class MessageViewSet(viewsets.ModelViewSet):
-    queryset = Lead.objects.all()
+    queryset = Message.objects.all()
     serializer_class = MessageSerializer
 
 
@@ -77,8 +77,15 @@ def send_ses(to_address, subject, body):
 def send_sms_view(request):
     phone_number = request.data.get('phone_number')
     message = request.data.get('message')
+    if not phone_number or not message:
+        return Response({"error": "Missing phone_number or message"}, status=status.HTTP_400_BAD_REQUEST)
+    
     response = send_sms(phone_number, message)
-    return Response(response)
+    if response:
+        return Response(response, status=status.HTTP_200_OK)
+    else:
+        return Response({"error": "Failed to send SMS"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
 
 @api_view(['POST'])
 def send_email_view(request):

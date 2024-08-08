@@ -51,3 +51,5 @@ class NotificationTestCase(TestCase):
         response = send_ses(to_address, subject, body)
         self.assertIsNotNone(response)
         self.assertIn('MessageId', response)
+
+
