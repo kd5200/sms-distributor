@@ -34,6 +34,7 @@ class MessageViewSet(viewsets.ModelViewSet):
     permission_classes = [DjangoModelPermissionsOrAnonReadOnly]
 
 
+#Function created for sending sms messages to lead which requires a phone number and a message to leverage aws sms
 def send_sms(phone_number, message):
     client = boto3.client(
         'sns',
@@ -52,6 +53,7 @@ def send_sms(phone_number, message):
 
     return response
 
+#Function created for sending ses marketing emails to lead which requires an email address(to_address), subject, and a body to leverage aws ses
 def send_ses(to_address, subject, body):
     client = boto3.client(
         'ses',
