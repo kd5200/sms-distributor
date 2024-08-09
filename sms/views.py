@@ -76,9 +76,8 @@ def send_ses(to_address, subject, body):
 
     return response
 
-# Keep in mind, when moving into production that we need to request to be removed from the sandbox environment within the AWS console for SES for daily limit increases and sending marketing messages to unverified recepients. 
 
-
+#We need an origination number to send a message to end users
 @api_view(['POST'])
 @permission_classes([AllowAny])  # Use a permission class that doesn't require a queryset
 def send_sms_view(request):
